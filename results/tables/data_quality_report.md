@@ -1,0 +1,24 @@
+# Data-quality report
+
+- **fixtures_total**: 3800
+- **fixtures_unmapped_team_names**: 0
+- **fixtures_duplicate_pairs**: 0
+- **fixtures_missing_values**: 0
+- **fixtures_team_twice_same_day**: 0
+- **fixtures_teams_not_38_games**: 0
+- **fixtures_dates_outside_season_window**: 0
+- **paper_rows**: 3791
+- **paper_missing_values**: 0
+- **paper_duplicate_match_id_rows**: 1
+- **paper_distinct_team_names**: 36
+- **paper_team_names_not_in_map**: []
+- **paper_rows_without_date**: 0
+- **paper_duplicate_fixture_rows**: 1
+- **score_mismatches_between_sources**: 0
+- **score_mismatch_rows**: []
+- **duplicate_fixture_paper_rows_dropped**: [434]
+- **matches_clean**: 3790
+- **fixtures_not_in_paper_dataset**: 10
+- **class_counts**: {'H': 1750, 'A': 1100, 'D': 940}
+- **class_share**: {'H': 0.4617, 'A': 0.2902, 'D': 0.248}
+- **alignment_with_match_vectors**: {'vector_rows': 3791, 'rows_kept_in_matches_clean': 3790, 'kept_rows_with_matching_label': 3790, 'kept_rows_with_label_mismatch': 0, 'rows_removed_as_duplicates': 1}

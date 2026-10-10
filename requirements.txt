@@ -1,0 +1,12 @@
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.4
+matplotlib>=3.8
+pytest>=8.0
+# notebooks
+nbformat>=5.9
+nbconvert>=7.0
+ipykernel>=6.29
+# demo (Phase 7, Person 2 / both)
+streamlit>=1.35
+joblib>=1.3

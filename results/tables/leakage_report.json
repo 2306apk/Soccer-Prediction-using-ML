@@ -1,0 +1,84 @@
+{
+  "1_chronology": {
+    "sorted_by_date": true,
+    "team_twice_same_day": 0,
+    "teams_not_38_games_per_season": 0
+  },
+  "2_brute_force": {
+    "values_checked": 5579,
+    "mismatches": 0,
+    "examples": []
+  },
+  "3_perturbation": {
+    "trials": 8,
+    "own_features_changed": 0,
+    "earlier_or_same_day_features_changed": 0,
+    "later_matches_of_involved_teams_unchanged": 0
+  },
+  "4_no_target_columns": {
+    "groups_checked": 19,
+    "groups_with_target_like_columns": {}
+  },
+  "4b_primary_group_separation": {
+    "historical_only_feature_count": 47,
+    "paper_or_lineup_sensitive_features_in_primary": [],
+    "historical_only_group_present": true,
+    "passed": true
+  },
+  "5_prematch_ratings": {
+    "pm_columns": 15,
+    "0910_rows_all_nan": true,
+    "mean_starter_coverage_1011_onwards": 0.737
+  },
+  "6_top_correlations_vs_goal_diff": [
+    {
+      "group": "historical_plus_ratings_sensitivity",
+      "feature": "elo_exp_home",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "historical_plus_ratings_sensitivity",
+      "feature": "elo_diff",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "historical_only_extended",
+      "feature": "elo_diff",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "historical_only_extended",
+      "feature": "elo_exp_home",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "historical_only",
+      "feature": "elo_exp_home",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "historical_only",
+      "feature": "elo_diff",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "elo",
+      "feature": "elo_diff",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    },
+    {
+      "group": "elo_extra",
+      "feature": "elo_exp_home",
+      "spearman_vs_goal_diff": 0.433,
+      "spearman_vs_home_win": 0.364
+    }
+  ],
+  "ALL_PASSED": true
+}

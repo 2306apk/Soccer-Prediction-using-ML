@@ -1,0 +1,15 @@
+group,feature,origin,spearman_vs_goal_diff,spearman_vs_home_win
+historical_plus_ratings_sensitivity,elo_exp_home,pre-match,0.433,0.364
+historical_plus_ratings_sensitivity,elo_diff,pre-match,0.433,0.364
+prematch_ratings_sensitivity,pm_diff_roster_rating,pre-match,0.395,0.336
+paper_F2,h_roster_rating,"paper ratings (season-end, not pre-match)",0.389,0.322
+paper_F2,a_roster_rating,"paper ratings (season-end, not pre-match)",-0.37,-0.307
+historical_differences_w10,diff_gd_avg_last10,pre-match,0.367,0.309
+paper_F2,h_off_rating,"paper ratings (season-end, not pre-match)",0.347,0.288
+prematch_ratings_sensitivity,pm_diff_off_rating,pre-match,0.341,0.284
+historical_differences_w10,diff_points_last10,pre-match,0.34,0.281
+historical_only_extended,diff_ppg_last10,pre-match,0.34,0.281
+historical_differences_w10,diff_gf_avg_last10,pre-match,0.338,0.279
+paper_F2,h_def_rating,"paper ratings (season-end, not pre-match)",0.328,0.273
+historical_differences_w10,diff_wins_last10,pre-match,0.327,0.267
+historical_venue_differences,diff_venue_ppg_last10,pre-match,0.327,0.266

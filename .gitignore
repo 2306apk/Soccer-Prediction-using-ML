@@ -1,0 +1,14 @@
+# raw downloads (re-created by `python -m src.data_preprocessing --fetch`)
+data/raw/
+# large derived file (re-created by `python -m src.improved_features`)
+data/processed/paper_f3.csv
+
+# python / tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.env
+*.pkl
+*.joblib

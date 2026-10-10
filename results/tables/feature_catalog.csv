@@ -1,0 +1,411 @@
+feature,group,description,available_before_kickoff
+h_roster_rating,paper_F1,"Paper F1: mean season-end rating of the match squad (home, away)",NOT pre-match (season-end rating includes this match)
+a_roster_rating,paper_F1,"Paper F1: mean season-end rating of the match squad (home, away)",NOT pre-match (season-end rating includes this match)
+h_gk_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+h_def_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+h_mid_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+h_off_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+a_gk_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+a_def_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+a_mid_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+a_off_rating,paper_F2,Paper F2: F1 + GK/DEF/MID/ATT time-weighted ratings,NOT pre-match (season-end rating + minutes played in this match)
+h_points_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_wins_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_draws_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_losses_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gf_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ga_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gd_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ppg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_trend_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_points_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_wins_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_draws_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_losses_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gf_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ga_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gd_avg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ppg_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_trend_last3,recent_form_w3,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+diff_points_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_wins_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_draws_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_losses_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_gf_avg_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_ga_avg_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_gd_avg_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_ppg_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+diff_trend_last3,historical_differences_w3,Home-minus-away differences of the corresponding features,yes
+h_points_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_wins_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_draws_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_losses_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gf_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ga_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gd_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ppg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_trend_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_points_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_wins_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_draws_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_losses_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gf_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ga_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gd_avg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ppg_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_trend_last5,recent_form_w5,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+diff_points_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_wins_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_draws_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_losses_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_gf_avg_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_ga_avg_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_gd_avg_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_ppg_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+diff_trend_last5,historical_differences_w5,Home-minus-away differences of the corresponding features,yes
+h_points_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_wins_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_draws_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_losses_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gf_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ga_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_gd_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_ppg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+h_trend_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_points_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_wins_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_draws_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_losses_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gf_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ga_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_gd_avg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_ppg_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+a_trend_last10,recent_form_w10,"Points/W/D/L, goals for/against/diff averages, PPG and trend over the last w matches (any venue)",yes
+diff_points_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_wins_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_draws_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_losses_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_gf_avg_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_ga_avg_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_gd_avg_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_ppg_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+diff_trend_last10,historical_differences_w10,Home-minus-away differences of the corresponding features,yes
+h_elo,elo,Pre-match Elo of home and away team and their difference,yes
+a_elo,elo,Pre-match Elo of home and away team and their difference,yes
+elo_diff,elo,Pre-match Elo of home and away team and their difference,yes
+elo_exp_home,elo_extra,Elo-based home win expectancy and absolute Elo gap (closeness -> draws),yes
+abs_elo_diff,elo_extra,Elo-based home win expectancy and absolute Elo gap (closeness -> draws),yes
+h_home_ppg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+h_home_win_rate_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+h_home_draw_rate_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+h_home_gf_avg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+h_home_ga_avg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+a_away_ppg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+a_away_win_rate_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+a_away_draw_rate_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+a_away_gf_avg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+a_away_ga_avg_last10,venue_form,"Home team's last 10 HOME games / away team's last 10 AWAY games: PPG, win & draw rate, goals for/against",yes
+diff_venue_ppg_last10,historical_venue_differences,Home-minus-away differences of the corresponding features,yes
+diff_venue_win_rate_last10,historical_venue_differences,Home-minus-away differences of the corresponding features,yes
+diff_venue_draw_rate_last10,historical_venue_differences,Home-minus-away differences of the corresponding features,yes
+diff_venue_gf_avg_last10,historical_venue_differences,Home-minus-away differences of the corresponding features,yes
+diff_venue_ga_avg_last10,historical_venue_differences,Home-minus-away differences of the corresponding features,yes
+n_prev_h,history_counts,Number of earlier matches a team has in the data (history length),yes
+n_prev_a,history_counts,Number of earlier matches a team has in the data (history length),yes
+pm_h_roster_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_h_gk_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_h_def_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_h_mid_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_h_off_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_h_rating_coverage,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_roster_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_gk_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_def_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_mid_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_off_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_a_rating_coverage,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_diff_roster_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_diff_gk_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_diff_def_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_diff_mid_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+pm_diff_off_rating,prematch_ratings_sensitivity,Starting-XI ratings from the PREVIOUS season (pre-match-safe alternative to F2),sensitivity experiment; lineup availability requires verification
+home_player0_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player0_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player1_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player2_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player3_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player4_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player5_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player6_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player7_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player8_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player9_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player10_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player11_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player12_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player13_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player14_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player15_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player16_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player17_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player18_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+home_player19_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player0_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player1_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player2_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player3_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player4_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player5_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player6_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player7_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player8_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player9_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player10_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player11_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player12_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player13_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player14_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player15_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player16_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player17_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player18_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_rating,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_pass_success,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_shots_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_key_passes_per_g,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_blocks,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
+away_player19_interceptions,paper_F3,Paper F3: detailed player-level statistics from the original implementation,NOT pre-match unless original feature availability is independently verified
