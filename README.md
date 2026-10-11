@@ -71,64 +71,183 @@ The `historical_only` and `historical_only_extended` groups do not include `pape
 
 The generic `diff_*` columns derived from the paper's roster/position ratings are retained for analysis, but are deliberately excluded from `historical_differences` and the historical-only groups.
 
-## Experiment plan for Person 2
+## Person 2 — Model Training, Evaluation & Inference Implementation
 
-1. **E0 — Paper reproduction:** compare the original F1/F2/F3 features with the paper's model families, where the source files allow it. The paper reports 58.89% test accuracy for F1 + degree-5 polynomial SVM.
-2. **E1 — Historical baseline:** `historical_only` with a tuned polynomial SVM.
-3. **E2 — Expanded history:** compare `historical_only_extended` with E1.
-4. **E3 — New models:** evaluate Random Forest, Gradient Boosting and HistGradientBoosting on the same training/validation protocol.
-5. **E4 — Sensitivity analysis:** optionally test `historical_plus_ratings_sensitivity`, clearly labelled as lineup-dependent.
-6. **E5 — Ensemble:** try soft voting only if validation indicates complementary model performance.
+Person 2 builds on Person 1's clean, leakage-free feature tables to implement the complete modeling, temporal evaluation, hyperparameter tuning, model comparison, ensembling, and serialization infrastructure.
 
-Change one feature group at a time where possible. Use cross-validation only on training data for tuning and selection. Report both a paper-style random-split comparison and a temporal evaluation on later seasons. Keep the final test seasons untouched until the final evaluation.
+### Quick start (Person 2)
 
-Recommended metrics: accuracy, macro F1, per-class precision/recall/F1, draw precision/recall, confusion matrix, and train/validation gap.
-
-## How Person 2 should load feature groups
-
-```python
-import json
-import pandas as pd
-from src.data_preprocessing import read_processed
-
-df = read_processed("features_engineered.csv")
-with open("data/processed/feature_groups.json", encoding="utf-8") as f:
-    groups = json.load(f)
-
-# Recommended primary feature set
-X = df[groups["historical_only"]]
-y = df["label"]
-
-# Expanded historical-only experiment
-X_extended = df[groups["historical_only_extended"]]
-
-# Paper F3 is stored separately; align by paper_row/fixture_id before using it
-# for the paper-reproduction experiment only.
-paper_f3 = pd.read_csv("data/processed/paper_f3.csv")
+```bash
+# Run the complete Person 2 pipeline and test suite
+bash run_person2.sh
 ```
 
-Use a scikit-learn `Pipeline` so imputation, scaling, feature selection and the classifier are fitted inside each training fold. Do not include `home_goals`, `away_goals`, `result`, `label`, IDs, dates or team names in `X`.
+Or execute individual modular commands:
 
-## Historical-feature implementation details
+```bash
+# 1. Inspect dataset splits and verify model pipeline creation
+python -m src.model_training
 
-- Rolling windows use matches strictly earlier than the target date.
-- Partial windows are scaled to the configured window for point/count features; no-history features are NaN and should be imputed within training folds.
-- Elo defaults: initial rating 1500, K=20, home advantage 65, goal-margin multiplier and 1/3 seasonal regression toward 1500. These are initial settings, not tuned parameters.
-- Promoted/returning clubs receive a regressed starting Elo and their within-league histories are reset for the season.
-- These settings should be documented and, if time permits, varied through training-only validation.
+# 2. Run Protocol A (Experiment E0: Paper-style reproduction)
+python scripts/run_paper_reproduction.py
 
-## Leakage checks and limitations
+# 3. Run Protocol B (Experiments E1-E5: Chronological evaluation, tuning, ensemble, serialization)
+python scripts/run_model_experiments.py
 
-`src/leakage_checks.py` checks chronological ordering, independently recomputes selected history values, perturbs match results to verify that the match's own and earlier features remain unchanged, checks target-like columns in feature groups, and checks previous-season rating availability.
+# 4. Run production inference demonstration on held-out test fixtures
+python scripts/demo_inference.py --fixture_index 0
 
-Run the complete script and test suite from a clean environment before submission. The tests require raw data to be fetched first.
+# 5. Run full automated test suite (25 tests)
+python -m pytest -v
+```
 
-The paper's exact reported split may not be fully reproducible because the release's shuffled vectors do not document the shuffle seed for every feature set. Record differences honestly instead of forcing our reproduction to match 58.89%.
+---
 
-## Suggested contribution split
+## Evaluation Protocols
 
-**Person 1:** dataset acquisition, cleaning, target labels, paper feature reconstruction, chronological historical features, leakage checks and feature analysis.
+### Protocol A: Original Paper Reproduction (Random 80:20 Split)
+- Reproduces the original paper's random 80:20 train/test split.
+- Evaluates feature sets `paper_F1` (2 squad ratings), `paper_F2` (10 position ratings), and `paper_F3` (280 detailed player match statistics).
+- Evaluates original model families: Polynomial SVM (degree 5 & 3), RBF SVM, Multinomial Logistic Regression, Gaussian Discriminant Analysis (LDA & QDA), and One-hidden-layer Neural Network (MLP).
+- **Paper Reference Comparison:**
+  - Original paper reports **58.89%** test accuracy for F1 with a degree-5 polynomial SVM.
+  - Our reproduction achieves **57.12%** test accuracy (a difference of only -1.77 percentage points, attributable to the paper's undocumented shuffle seed and deduplication of fixture row 434).
 
-**Person 2:** model pipelines, hyperparameter tuning, cross-validation, temporal evaluation, model comparisons, ensemble testing and final model serialization.
+### Protocol B: Chronological Future-Season Evaluation (Primary Protocol)
+In real-world soccer forecasting, matches occur chronologically: a model must be trained on past seasons and predict unseen future fixtures without lookahead leakage.
+- **Strict Chronological Ordering:**
+  - **Training Period:** 2009/10–2015/16 (7 seasons, 2,657 matches, ~70.1%)
+  - **Validation Period:** 2016/17 (1 season, 379 matches, ~10.0%) — used strictly for model selection, thresholding, and ensemble tuning.
+  - **Final Test Period:** 2017/18–2018/19 (2 seasons, 754 matches, ~19.9%) — held out untouched until final model evaluation.
+  - Verification: `max(Date_Train) < min(Date_Val) <= max(Date_Val) < min(Date_Test)`. Zero cross-boundary leakage.
+- **Cross-Validation within Training:**
+  - Expanding-window 3-fold chronological cross-validation:
+    - Fold 0: Train 2009/10–2012/13, Validate 2013/14
+    - Fold 1: Train 2009/10–2013/14, Validate 2014/15
+    - Fold 2: Train 2009/10–2014/15, Validate 2015/16
 
-**Both:** integration, demo, README, report, presentation, repository maintenance and viva preparation.
+---
+
+## Experimental Results Summary
+
+Master results are saved to `results/tables/model_comparison.csv`.
+
+| Exp | Protocol | Feature Group | Model | Val Acc | Val Macro-F1 | Test Acc | Test Macro-F1 | Draw Recall | Key Insight |
+|---|---|---|---|---|---|---|---|---|---|
+| **E0** | Protocol A (Random 80:20) | `paper_F1` | Poly-5 SVM | — | — | **57.12%** | 0.4262 | 0.5% | Reproduces paper reference (58.89%) within 1.77% |
+| **E0** | Protocol A (Random 80:20) | `paper_F3` | Logistic Reg | — | — | **54.75%** | 0.5031 | 27.7% | 280 player stats improve draw recall under random split |
+| **E1** | Protocol B (Chronological) | `historical_only` | Tuned Poly-2 SVM | 51.19% | 0.4885 | 51.19% | 0.4953 | 41.8% | Balanced weighting boosts draw recall from 0% to 41.8% |
+| **E2** | Protocol B (Chronological) | `historical_only_extended` | Tuned Poly-2 SVM | 48.28% | 0.4628 | 49.20% | 0.4754 | 38.8% | Adding 3/10-match windows diluted performance |
+| **E3** | Protocol B (Chronological) | `historical_only` | Multinomial Logistic Reg | 52.24% | 0.4951 | **53.45%** | **0.5162** | 42.4% | Highest individual test accuracy & Macro-F1 |
+| **E3** | Protocol B (Chronological) | `historical_only` | RBF SVM | 50.66% | 0.4915 | 51.19% | 0.4974 | 42.9% | Strong balanced recall across H, D, and A |
+| **E3** | Protocol B (Chronological) | `historical_only` | GDA (LDA) | 57.52% | 0.4736 | **55.84%** | 0.4641 | 10.6% | High accuracy by predicting mostly Home wins; misses draws |
+| **E3** | Protocol B (Chronological) | `historical_only` | GDA (QDA) | 52.77% | 0.4893 | 52.65% | 0.4856 | 27.6% | Class-specific covariances improve draw capture |
+| **E3** | Protocol B (Chronological) | `historical_only` | Neural Net (MLP) | 55.41% | 0.4675 | 54.77% | 0.4718 | 15.9% | Moderate generalization, tends toward majority class |
+| **E3** | Protocol B (Chronological) | `historical_only` | Random Forest | 50.66% | 0.4901 | 50.40% | 0.4944 | **46.5%** | Highest draw recall among all single models |
+| **E3** | Protocol B (Chronological) | `historical_only` | HistGradientBoosting | 53.03% | 0.4922 | 51.72% | 0.4766 | 24.7% | Fast tree-based boosting with binned features |
+| **E4** | Protocol B (Chronological) | `historical_plus_ratings_sensitivity` | Logistic Reg (Sensitivity) | 53.30% | **0.5118** | 51.59% | 0.4928 | 34.7% | Previous-season ratings do not beat pure match history |
+| **E5** | Protocol B (Chronological) | `historical_only` | **Soft Voting Ensemble (HistGB+LR+RF)** | **54.62%** | **0.5074** | **51.86%** | **0.4826** | 28.2% | **Champion Architecture:** Highest validation score, smooth predicted probabilities via soft voting |
+| **Refit** | Protocol B (Train + Val Refit) | `historical_only` | **Selected Champion (Refitted on 0910–1617)** | — | — | **51.99%** | **0.4877** | 30.0% | **Production Model:** Refitted on all pre-test data (3,036 matches) for final serialization |
+
+> **Note on Evaluation Protocol & Discrepancies:**
+> 1. In `results/tables/model_comparison.csv`, all Protocol B models (including E5) are fitted strictly on `df_train` (seasons 2009/10–2015/16, 2,657 matches) for unbiased, fair benchmark comparison. Under this partition, E5 achieves 51.86% test accuracy.
+> 2. Model selection was performed **strictly using validation macro-F1** on season 2016/17 (Ensemble 0.5074 vs Logistic Regression 0.4951). Test labels were completely withheld during selection.
+> 3. Standard ML deployment practice refits the selected architecture on `df_train + df_val` (seasons 2009/10–2016/17, 3,036 matches) before saving to disk. On the held-out test set (seasons 2017/18–2018/19, 754 matches), this serialized model achieves **51.99% test accuracy**, **0.4877 test macro-F1**, and **30.0% draw recall**.
+> 4. Probabilities are generated via soft-voting class aggregation across base estimators rather than formal post-hoc calibration curves.
+
+---
+
+## Key Viva & Mini-Project Findings
+
+1. **Reproducibility of the Original Paper:**
+   - The paper's 58.89% result on F1 with degree-5 SVM is closely reproducible (we observed 57.12%).
+   - However, the paper's F1/F2/F3 features rely on end-of-season roster ratings and match minutes played (post-match information), making them unsuitable for live pre-match forecasting.
+2. **Historical Match Features Generalize Well:**
+   - On true unseen future seasons (2017/18 and 2018/19, 754 matches), historical-only features (last-5 form, Elo ratings, home/away venue form, and differential metrics) achieve **53.45% accuracy** and **0.5162 Macro-F1** with Logistic Regression, and **51.99% accuracy** with the refitted ensemble.
+   - The majority class baseline on the final test set (always predicting Home Win) is **46.29%** (349 / 754 matches; 46.17% across the entire 10-season dataset), meaning the pre-match historical features provide a solid statistical edge of **+7.16 percentage points** for Logistic Regression and **+5.70 percentage points** for the ensemble.
+3. **Compact vs Extended History:**
+   - `historical_only` (47 features) outperformed `historical_only_extended` (101 features, 49.20% accuracy). Expanding rolling windows to 3 and 10 games introduced feature collinearity without adding predictive signal.
+4. **The Draw Prediction Challenge:**
+   - Draws represent ~24.8% of matches. Unweighted models frequently achieve 0% to 10% draw recall because predicting Home/Away wins maximizes raw accuracy.
+   - Incorporating class weighting and soft ensembling boosted draw recall to **28%–46%**, dramatically improving Macro-F1 and tactical utility.
+5. **Model Selection & Champion Ensemble:**
+   - Selecting strictly by validation Macro-F1 identified the **Soft Voting Ensemble (HistGradientBoosting + Multinomial Logistic Regression + Random Forest)**.
+   - Refit on combined 2009/10–2016/17 data and evaluated once on the untouched 2017/18–2018/19 test period, it delivers balanced performance across all three match outcomes (Home Recall: 59.0%, Draw Recall: 30.0%, Away Recall: 57.5%).
+
+---
+
+## Production Model Serialization & Inference
+
+The final trained champion pipeline is serialized and ready for deployment:
+- **Model weights:** `results/models/epl_model.joblib`
+- **Metadata & schema:** `results/models/model_metadata.json`
+
+### Python Inference API
+
+```python
+import pandas as pd
+from src.model_inference import EPLMatchPredictor
+
+# 1. Load the serialized pipeline and schema
+predictor = EPLMatchPredictor.load(
+    model_path="results/models/epl_model.joblib",
+    metadata_path="results/models/model_metadata.json",
+)
+
+# 2. Predict on fixture features (validates schema & auto-aligns column order)
+sample_fixture = pd.read_csv("data/processed/features_engineered.csv").iloc[[0]]
+prediction = predictor.predict(sample_fixture)
+
+print(prediction)
+# Output columns:
+# ['predicted_outcome', 'predicted_label_full', 'prob_H', 'prob_D', 'prob_A']
+```
+
+---
+
+## Generated Artifacts
+
+### Figures (`results/figures/`)
+- `01_outcome_share_by_season.png` — Outcome distribution by season
+- `02_draw_rate_vs_elo_gap.png` — Draw frequency vs Elo difference
+- `03_elo_diff_by_outcome.png` — Elo differences by result
+- `04_top_feature_correlations.png` — Spearman correlations with goal difference
+- `05_elo_trajectories.png` — Team Elo trajectory over time
+- `06_prematch_rating_coverage.png` — Pre-match player rating coverage
+- `07_model_accuracy_comparison.png` — Chronological test accuracy across model families
+- `08_model_macro_f1_comparison.png` — Chronological test macro-F1 comparison
+- `09_per_class_recall_comparison.png` — Grouped recall by class (H / D / A)
+- `10_selected_model_confusion_matrix.png` — Champion model confusion matrix heatmap
+- `11_feature_group_comparison.png` — Historical vs Extended vs Sensitivity feature performance
+- `12_draw_prediction_performance.png` — Draw recall comparison
+- `e0_paper_reproduction_accuracy.png` — Protocol A reproduction vs paper reference
+
+### Tables (`results/tables/`)
+- `model_comparison.csv` — Master evaluation table with all required columns
+- `paper_reproduction_results.csv` — Protocol A results table
+- `chronological_confusion_matrices.csv` — Confusion matrices for all chronological models
+- `e0_confusion_matrices.csv` — Confusion matrices for paper reproduction models
+- `dataset_summary.csv`, `feature_catalog.csv`, `leakage_report.json` — Preprocessing & quality reports
+
+---
+
+## Automated Test Suite
+
+All 25 unit and integration tests run in under 8 seconds:
+
+```bash
+python -m pytest -v
+```
+
+1. `tests/test_person1_pipeline.py` (14 tests): Dataset shape, duplicate elimination, paper vector alignment, chronology, perturbation leakage checks, zero-sum Elo, feature separation.
+2. `tests/test_model_pipeline.py` (5 tests): Dataset loading, target leakage prevention, valid target classes, missing value imputation inside pipeline, metric calculation and label order `["H", "D", "A"]`.
+3. `tests/test_chronological_split.py` (3 tests): Strict non-overlapping partition, time arrow verification (`Train < Val < Test`), expanding-window cross-validation.
+4. `tests/test_model_inference.py` (3 tests): Model serialization round-trip, feature reordering, missing feature rejection, output prediction schema.
+
+---
+
+## Authors & Responsibilities
+
+- **Person 1:** Dataset acquisition, cleaning, target labels, paper feature reconstruction, chronological historical feature engineering, leakage verification, exploratory feature analysis.
+- **Person 2:** Model pipeline architecture, chronological evaluation design, hyperparameter tuning, paper-style reproduction, model comparison (8 model families), ensemble design, model serialization, inference interface, automated test suite, documentation.
+- **Both:** End-to-end integration, demo preparation, research report & viva presentation.

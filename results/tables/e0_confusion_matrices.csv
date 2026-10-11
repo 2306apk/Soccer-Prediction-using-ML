@@ -1,0 +1,61 @@
+,Pred_H,Pred_D,Pred_A,model_name
+Actual_H,294,0,56,paper_F1_Poly SVM (deg 5)
+Actual_D,118,1,69,paper_F1_Poly SVM (deg 5)
+Actual_A,82,0,138,paper_F1_Poly SVM (deg 5)
+Actual_H,294,0,56,paper_F1_Poly SVM (deg 3)
+Actual_D,114,0,74,paper_F1_Poly SVM (deg 3)
+Actual_A,80,0,140,paper_F1_Poly SVM (deg 3)
+Actual_H,297,2,51,paper_F1_RBF SVM
+Actual_D,117,3,68,paper_F1_RBF SVM
+Actual_A,85,1,134,paper_F1_RBF SVM
+Actual_H,291,0,59,paper_F1_Multinomial Logistic Reg
+Actual_D,111,0,77,paper_F1_Multinomial Logistic Reg
+Actual_A,78,0,142,paper_F1_Multinomial Logistic Reg
+Actual_H,290,0,60,paper_F1_GDA (LDA)
+Actual_D,111,0,77,paper_F1_GDA (LDA)
+Actual_A,78,0,142,paper_F1_GDA (LDA)
+Actual_H,296,1,53,paper_F1_GDA (QDA)
+Actual_D,115,2,71,paper_F1_GDA (QDA)
+Actual_A,83,3,134,paper_F1_GDA (QDA)
+Actual_H,272,2,76,paper_F1_Neural Network (MLP 1-layer)
+Actual_D,101,3,84,paper_F1_Neural Network (MLP 1-layer)
+Actual_A,61,4,155,paper_F1_Neural Network (MLP 1-layer)
+Actual_H,245,44,61,paper_F2_Poly SVM (deg 5)
+Actual_D,94,26,68,paper_F2_Poly SVM (deg 5)
+Actual_A,64,44,112,paper_F2_Poly SVM (deg 5)
+Actual_H,278,15,57,paper_F2_Poly SVM (deg 3)
+Actual_D,111,11,66,paper_F2_Poly SVM (deg 3)
+Actual_A,78,14,128,paper_F2_Poly SVM (deg 3)
+Actual_H,287,6,57,paper_F2_RBF SVM
+Actual_D,112,8,68,paper_F2_RBF SVM
+Actual_A,79,9,132,paper_F2_RBF SVM
+Actual_H,283,7,60,paper_F2_Multinomial Logistic Reg
+Actual_D,113,7,68,paper_F2_Multinomial Logistic Reg
+Actual_A,73,7,140,paper_F2_Multinomial Logistic Reg
+Actual_H,280,10,60,paper_F2_GDA (LDA)
+Actual_D,115,8,65,paper_F2_GDA (LDA)
+Actual_A,72,10,138,paper_F2_GDA (LDA)
+Actual_H,279,12,59,paper_F2_GDA (QDA)
+Actual_D,108,9,71,paper_F2_GDA (QDA)
+Actual_A,71,11,138,paper_F2_GDA (QDA)
+Actual_H,272,26,52,paper_F2_Neural Network (MLP 1-layer)
+Actual_D,102,26,60,paper_F2_Neural Network (MLP 1-layer)
+Actual_A,65,17,138,paper_F2_Neural Network (MLP 1-layer)
+Actual_H,243,54,53,paper_F3_Poly SVM (deg 5)
+Actual_D,93,43,52,paper_F3_Poly SVM (deg 5)
+Actual_A,61,47,112,paper_F3_Poly SVM (deg 5)
+Actual_H,243,55,52,paper_F3_Poly SVM (deg 3)
+Actual_D,90,46,52,paper_F3_Poly SVM (deg 3)
+Actual_A,59,45,116,paper_F3_Poly SVM (deg 3)
+Actual_H,281,7,62,paper_F3_RBF SVM
+Actual_D,130,13,45,paper_F3_RBF SVM
+Actual_A,92,15,113,paper_F3_RBF SVM
+Actual_H,246,45,59,paper_F3_Multinomial Logistic Reg
+Actual_D,99,52,37,paper_F3_Multinomial Logistic Reg
+Actual_A,61,42,117,paper_F3_Multinomial Logistic Reg
+Actual_H,244,55,51,paper_F3_GDA (LDA)
+Actual_D,98,49,41,paper_F3_GDA (LDA)
+Actual_A,59,47,114,paper_F3_GDA (LDA)
+Actual_H,245,40,65,paper_F3_Neural Network (MLP 1-layer)
+Actual_D,98,31,59,paper_F3_Neural Network (MLP 1-layer)
+Actual_A,68,35,117,paper_F3_Neural Network (MLP 1-layer)
