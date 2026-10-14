@@ -1,253 +1,492 @@
-# EPL Match-Outcome Prediction — Person 1: Data & Feature Engineering
+# EPL Match Outcome Prediction Using Machine Learning
 
-This repository prepares the dataset and feature tables for a two-person project that compares the paper's original EPL match-prediction approach with a separate, historical-only prediction approach.
+A machine learning project for predicting English Premier League (EPL) match outcomes: **Home Win (H), Draw (D), or Away Win (A)**.
 
-**Important distinction:** the original paper features are retained for reproduction. They are not treated as valid pre-match predictors because the released ratings/statistics use end-of-season roster information and actual minutes played. The recommended primary model uses only information derived from matches completed before the fixture.
+The project reproduces the experiments from *Gaining a Statistical Edge in Soccer Prediction using Machine Learning: Role of Meta Statistics in Match Prediction* and extends the analysis with historical-only features, chronological evaluation, model comparison, and an inference pipeline.
 
-## Quick start
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Problem Statement](#problem-statement)
+- [Research Paper](#research-paper)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+- [Feature Engineering](#feature-engineering)
+- [Models Implemented](#models-implemented)
+- [Experimental Design](#experimental-design)
+- [Results](#results)
+- [Evaluation Metrics](#evaluation-metrics)
+- [Inference Demo](#inference-demo)
+- [Project Structure](#project-structure)
+- [Installation and Setup](#installation-and-setup)
+- [Running the Project](#running-the-project)
+- [Testing](#testing)
+- [Reproducibility and Limitations](#reproducibility-and-limitations)
+- [Team Contributions](#team-contributions)
+- [References](#references)
+
+## Project Overview
+
+Football match outcomes depend on several factors, including team strength, historical performance, home advantage, and the unpredictable nature of individual matches. Machine learning provides a way to learn patterns from historical data and estimate the likely outcome of a future fixture.
+
+This project investigates three-class EPL match prediction through two complementary experiments:
+
+1. **Research paper reproduction:** Compare multiple classification algorithms and feature sets using a random 80:20 train-test split, following the original paper's experimental approach.
+2. **Chronological evaluation:** Train on earlier seasons, select models using a validation season, and evaluate on later seasons using historical-only pre-match features.
+
+The implementation includes data preprocessing, feature engineering, model training, hyperparameter tuning, model comparison, evaluation visualizations, automated tests, model serialization, and a command-line inference demonstration.
+
+The project evaluates not only overall accuracy but also macro-F1 and class-specific performance, particularly the ability to predict draws.
+
+## Problem Statement
+
+Given historical EPL match information available before kickoff, predict whether the home team will win, the match will end in a draw, or the away team will win.
+
+The primary challenges are:
+
+- Distinguishing between three outcomes with overlapping characteristics.
+- Accounting for changes in team strength and form over time.
+- Avoiding information leakage from the match being predicted or from future matches.
+- Evaluating whether models generalize to later seasons.
+- Understanding the trade-off between overall accuracy and the prediction of less frequently identified outcomes, particularly draws.
+
+## Research Paper
+
+**Title:** *Gaining a Statistical Edge in Soccer Prediction using Machine Learning: Role of Meta Statistics in Match Prediction*
+
+**Authors:** Varun Harbola and Kyuho Lee  
+**Institution:** Stanford University  
+**Year:** 2019
+
+- [Original research paper (PDF)](https://cs229.stanford.edu/proj2019aut/data/assignment_308832_raw/26414102.pdf)
+- [Research poster (PDF)](https://cs229.stanford.edu/proj2019aut/data/assignment_308875_raw/26414177.pdf)
+
+The original research investigates multiple classification techniques and three feature sets for predicting EPL match outcomes. Its best reported test accuracy is **58.89%**, obtained using an SVM with a degree-five polynomial kernel and feature set F1.
+
+This project attempts to reproduce that experimental result and extends the investigation with a separate chronological evaluation using pre-match historical information.
+
+## Dataset
+
+The project uses EPL match data spanning ten seasons, from **2009/10 through 2018/19**.
+
+| Property | Description |
+|---|---|
+| Competition | English Premier League |
+| Seasons | 2009/10–2018/19 |
+| Original paper dataset | 3,800 matches |
+| Processed dataset | 3,790 unique matches |
+| Prediction target | Home win (H), draw (D), away win (A) |
+| Prediction type | Three-class supervised classification |
+
+The processed dataset contains 3,790 unique matches after one duplicate fixture was removed during preprocessing.
+
+The project maintains the original paper-derived feature groups separately from the historical-only feature group used for chronological forecasting.
+
+Raw and processed data files are generated by the data preparation pipeline and may be excluded from Git through `.gitignore`. Follow the setup instructions below to regenerate them.
+
+## Methodology
+
+The project follows a supervised machine learning workflow.
+
+1. **Data preprocessing:** Load, clean, align and validate EPL match records.
+2. **Feature engineering:** Construct paper-derived features and historical-only pre-match features.
+3. **Experimental splitting:** Evaluate paper reproduction and chronological forecasting using separate protocols.
+4. **Model training:** Fit and compare multiple classification algorithms.
+5. **Model selection:** Use validation performance, with macro-F1 as the primary selection metric for the chronological champion.
+6. **Evaluation:** Measure accuracy, macro-F1, per-class precision and recall, and confusion matrices.
+7. **Inference:** Serialize the selected pipeline and demonstrate prediction on a fixture.
+
+### Protocol A: Research Paper Reproduction
+
+This experiment uses a random 80:20 train-test split over the processed dataset and evaluates the paper-derived feature groups.
+
+Its purpose is to compare the implementation with the original paper's reported results under a similar experimental setup.
+
+The reported result is close to, but below, the paper's best accuracy. Exact equality is not expected because the paper's random shuffle seed is undocumented and the processed dataset contains 3,790 unique matches rather than the original 3,800.
+
+### Protocol B: Chronological Evaluation
+
+This experiment evaluates forecasting on later seasons using historical-only pre-match features.
+
+| Partition | Seasons | Matches |
+|---|---|---:|
+| Training | 2009/10–2015/16 | 2,657 |
+| Validation | 2016/17 | 379 |
+| Test | 2017/18–2018/19 | 754 |
+| **Total** | **2009/10–2018/19** | **3,790** |
+
+The training partition is used to fit candidate models. Validation performance guides model selection. The selected ensemble is then refitted using training and validation data before its final test evaluation.
+
+Chronological evaluation better reflects the intended forecasting scenario than randomly mixing matches from different seasons. However, the test metrics were also logged for candidate models during the experiment loop, so the test set should not be described as completely untouched throughout model development.
+
+The random-split and chronological results answer different questions and should not be treated as directly comparable scores.
+
+## Feature Engineering
+
+### 1. Paper-Derived Feature Groups
+
+The reproduction experiment uses the three feature groups described in the original paper.
+
+| Feature group | Description |
+|---|---|
+| `paper_F1` | Overall home and away squad-average ratings |
+| `paper_F2` | Overall ratings plus positional ratings for attack, midfield, defence, and goalkeeper |
+| `paper_F3` | A larger set of player ratings and statistics, including passing, shots, key passes, blocks, and interceptions |
+
+These features support the reproduction experiment. The underlying roster and player statistics are derived from season-level files and may contain retrospective information that would not necessarily have been available before an individual match.
+
+Consequently, the paper-derived feature groups are kept separate from the primary historical-only forecasting track.
+
+### 2. Historical-Only Features
+
+The chronological evaluation uses features derived from information available before the predicted match, including:
+
+- Historical match outcomes and team form.
+- Venue-specific historical performance.
+- Elo-based team strength and relative strength differences.
+- Other historical features implemented in the data pipeline.
+
+The feature-generation process respects match chronology: historical statistics are calculated from prior matches, and ratings are updated after the match rather than before it.
+
+Leakage checks and automated tests are included to verify chronological behavior and feature-group separation.
+
+## Models Implemented
+
+The project compares several classification algorithms.
+
+| Model | Purpose |
+|---|---|
+| Support Vector Machine (SVM) | Linear and nonlinear decision boundaries; includes the degree-five polynomial kernel used in the paper reproduction |
+| Logistic Regression | Probabilistic classification baseline |
+| Linear Discriminant Analysis (LDA) | Generative classification using class distributions |
+| Quadratic Discriminant Analysis (QDA) | Classification allowing class-specific covariance structures |
+| Random Forest | Ensemble of decision trees |
+| Multilayer Perceptron (MLP) | Neural network for learning nonlinear relationships |
+| Histogram-based Gradient Boosting | Sequential tree-based learning |
+| Soft-Voting Ensemble | Combines class-probability estimates from multiple classifiers |
+
+### Soft-Voting Ensemble
+
+The chronological experiment includes a soft-voting ensemble. Rather than relying on one classifier's predicted label, soft voting averages the component models' class-probability estimates and selects the class with the highest combined probability.
+
+For class \(c\), the unweighted soft-voting estimate is:
+
+\[
+P_{\mathrm{ensemble}}(c\mid x)
+=
+\frac{1}{M}\sum_{m=1}^{M}P_m(c\mid x)
+\]
+
+where \(M\) is the number of component models and \(x\) represents the match features.
+
+The chronological champion is selected using validation macro-F1, with validation accuracy used as a tie-breaker in the implemented selection procedure.
+
+Soft voting does not guarantee better performance than an individual model. The ensemble is evaluated using the same metrics as the other candidates.
+
+The reported probabilities are model probability estimates; probability calibration has not been established.
+
+## Experimental Design
+
+### Paper Reproduction Experiments
+
+The paper-reproduction script evaluates the paper-derived feature groups using multiple model families under a random 80:20 split.
+
+The primary comparison is against the original paper's best reported result of 58.89% test accuracy.
+
+### Chronological Experiments
+
+The chronological experiment script evaluates candidate models on historical-only features and additional sensitivity experiments.
+
+The main steps are:
+
+1. Train candidate models using the training seasons.
+2. Compare models using validation macro-F1 and validation accuracy.
+3. Select the champion using validation performance.
+4. Refit the selected champion on the combined training and validation seasons.
+5. Evaluate the refitted champion on the later test seasons.
+6. Serialize the final inference pipeline and export evaluation artifacts.
+
+The experiment pipeline includes preprocessing within model pipelines, chronological split checks, and feature-group validation.
+
+## Results
+
+### 1. Research Paper Reproduction
+
+| Experiment | Test accuracy |
+|---|---:|
+| Original paper: degree-five polynomial SVM on F1 | 58.89% |
+| Our reproduction: degree-five polynomial SVM on `paper_F1` | 57.12% |
+| Difference | −1.77 percentage points |
+
+The reproduced result is 1.77 percentage points below the paper's reported best result.
+
+This is a reproduction attempt rather than an exact replication because the paper's random shuffle seed is undocumented and the processed dataset differs by one duplicate fixture.
+
+### 2. Chronological Model Comparison
+
+The following values are the reported results from the project experiments.
+
+| Model | Test accuracy | Test macro-F1 | Draw recall |
+|---|---:|---:|---:|
+| Logistic Regression | 53.45% | 0.5162 | 42.4% |
+| Linear Discriminant Analysis | 55.84% | — | 10.6% |
+| Random Forest | 50.40% | 0.4944 | 46.5% |
+| Multilayer Perceptron | 55.41% | 0.4718 | 15.9% |
+| Histogram-based Gradient Boosting | 51.72% | 0.4766 | 24.7% |
+| Soft-Voting Ensemble — train-only comparison | 51.86% | 0.4826 | 28.2% |
+| **Soft-Voting Ensemble — refitted champion** | **51.99%** | **0.4877** | **30.0%** |
+
+A dash indicates a metric not included in the reported summary table.
+
+The train-only ensemble result and the refitted champion result differ because they use different training partitions. The former uses the training seasons only, while the latter is refitted using training plus validation seasons before evaluation on the same later-season test period.
+
+### 3. Interpretation
+
+The results highlight several observations:
+
+- The paper-style SVM reproduction approaches the original reported accuracy but does not exceed it.
+- Chronological evaluation is a different and more demanding forecasting setup because the model must predict later seasons from earlier data.
+- Accuracy alone does not fully characterize three-class match prediction.
+- Draw recall varies substantially between models, illustrating the difficulty of identifying draw outcomes.
+- A model with higher accuracy does not necessarily perform better on every outcome class.
+- The ensemble was selected using validation macro-F1, not by choosing the highest test accuracy.
+
+The chronological experiment should be interpreted as an evaluation on later seasons within the available dataset, not as proof of performance on current EPL fixtures or future seasons outside the dataset.
+
+## Evaluation Metrics
+
+The project reports several complementary metrics.
+
+**Accuracy**
+
+The proportion of correctly predicted match outcomes across all evaluated fixtures.
+
+**Macro-F1**
+
+The unweighted average of the F1 scores for home wins, draws, and away wins. It gives each class equal importance in the final average.
+
+**Precision and recall**
+
+These metrics measure the reliability and coverage of predictions for each outcome class. Draw recall is particularly useful for identifying models that rarely recognize draws.
+
+**Confusion matrix**
+
+The confusion matrix shows the relationship between actual and predicted classes and helps identify which outcomes are commonly confused.
+
+Together, these metrics provide a more complete evaluation than accuracy alone.
+
+## Inference Demo
+
+The project includes a command-line inference demonstration that loads the serialized model and predicts the outcome of a fixture.
+
+From the repository root, run:
 
 ```bash
+python scripts/demo_inference.py --fixture_index 0
+```
+
+The demo reports the fixture, predicted outcome, estimated probabilities for home win/draw/away win, and the recorded outcome when available.
+
+A previously recorded demonstration predicted a home win for Manchester United against Leicester and matched the fixture's recorded result. This is an individual example, not a measure of overall predictive performance.
+
+The inference module includes feature-schema validation and column reordering to maintain compatibility with the trained model.
+
+## Project Structure
+
+The main components are organized as follows. Some generated data and model artifacts are ignored by Git and are created by the pipeline.
+
+```text
+.
+├── README.md
+├── requirements.txt
+├── run_person1.sh
+├── run_person2.sh
+├── src/
+│   ├── data_preprocessing.py
+│   ├── feature_engineering.py
+│   ├── model_training.py
+│   ├── model_evaluation.py
+│   ├── model_tuning.py
+│   └── model_inference.py
+├── scripts/
+│   ├── run_paper_reproduction.py
+│   ├── run_model_experiments.py
+│   └── demo_inference.py
+├── tests/
+│   ├── conftest.py
+│   ├── test_chronological_split.py
+│   ├── test_model_pipeline.py
+│   ├── test_model_inference.py
+│   └── test_person1_pipeline.py
+├── data/
+│   ├── raw/
+│   └── processed/
+└── results/
+    ├── figures/
+    ├── tables/
+    └── models/
+        └── model_metadata.json
+```
+
+The exact filenames in the local checkout are authoritative; generated files and raw data may not be present in a fresh clone until the pipeline is run.
+
+### Important Components
+
+- `src/data_preprocessing.py`: Match-data loading, cleaning and alignment.
+- `src/feature_engineering.py`: Construction of historical and paper-derived features.
+- `src/model_training.py`: Data splits, model pipeline construction and training utilities.
+- `src/model_evaluation.py`: Evaluation metrics and confusion matrices.
+- `src/model_tuning.py`: Chronological model selection and tuning.
+- `src/model_inference.py`: Loading and applying the serialized prediction pipeline.
+- `scripts/run_paper_reproduction.py`: Paper-style reproduction experiments.
+- `scripts/run_model_experiments.py`: Chronological model comparisons and champion selection.
+- `scripts/demo_inference.py`: Example fixture prediction.
+- `run_person1.sh`: Data preparation and feature engineering.
+- `run_person2.sh`: Model experiments, result generation, serialization and associated verification steps.
+
+## Installation and Setup
+
+### Prerequisites
+
+- Python 3.11 recommended.
+- Git.
+- A compatible environment for the project's Python dependencies.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/2306apk/Gaining-a-Statistical-Edge-in-Soccer-Prediction-using-ML.git
+cd Gaining-a-Statistical-Edge-in-Soccer-Prediction-using-ML
+```
+
+### 2. Create a virtual environment
+
+On macOS or Linux:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
+```
+
+If the repository's setup instructions or dependencies change, follow the requirements file in the checked-out commit.
+
+## Running the Project
+
+Run commands from the repository root with the virtual environment activated.
+
+### Step 1: Prepare the dataset
+
+```bash
 bash run_person1.sh
 ```
 
-The script fetches the raw source data, rebuilds processed data/features, runs leakage checks and feature analysis, then runs the tests.
+This runs the data preparation pipeline, including the generation of cleaned matches, engineered features, paper-derived features and feature-group metadata.
 
-Raw downloads are not committed (`data/raw/` is git-ignored). Run the script from the repository root.
+Some raw data and generated intermediate files are ignored by Git and must be regenerated locally.
 
-## Outputs
-
-| Command | Main outputs |
-|---|---|
-| `python -m src.data_preprocessing --fetch --build` | `matches_clean.csv`, `fixtures_full.csv`, data-quality report |
-| `python -m src.improved_features` | `features_engineered.csv`, `paper_f3.csv`, `feature_groups.json` |
-| `python -m src.leakage_checks` | `leakage_report.json`, feature/outcome correlation table |
-| `python -m src.feature_analysis` | figures and supporting CSV tables |
-| `python -m pytest -q` | automated tests |
-
-## Dataset notes
-
-- The paper describes 3,800 EPL matches across 2009/10–2018/19.
-- Its released vectors contain 3,791 rows, including one duplicated fixture. The clean match table retains 3,790 unique matches.
-- The fixture table contains all 3,800 fixtures, including matches absent from the paper's vector files. These fixtures are retained to make chronological team histories more complete.
-- Dates are joined from the openfootball fixture lists. Scores and labels are checked against the paper's vectors.
-- Labels are `H` (home win), `D` (draw), and `A` (away win). `label` is an encoded target column, not a model feature.
-
-## Feature tracks
-
-### Track A — faithful paper reproduction
-
-- `paper_F1`: overall home/away roster ratings.
-- `paper_F2`: overall and position-wise ratings.
-- `paper_F3`: detailed player statistics in the separate `paper_f3.csv` table.
-- These groups exist to reproduce and compare with the original paper. They are **not leakage-free pre-match features**: the original roster statistics are end-of-season values and positional weights use minutes played in the target match.
-
-Do not combine these groups into the primary historical-only model and then describe that model as leakage-free.
-
-### Track B — recommended historical-only prediction features
-
-All historical features are calculated chronologically. For each date, the pipeline calculates features for all fixtures before applying any results from that date. No feature uses the target fixture's result or a later result.
-
-| Feature group | Contents |
-|---|---|
-| `recent_form_w3`, `recent_form_w5`, `recent_form_w10` | Previous-match points, W/D/L counts, goals for/against, goal difference, points per match and form trend |
-| `elo`, `elo_extra` | Pre-match home/away Elo, Elo difference, expected home result and absolute Elo gap |
-| `venue_form` | Home team's previous home form and away team's previous away form |
-| `historical_differences_w3/w5/w10` | Differences between the two teams' corresponding historical-form features |
-| `historical_venue_differences` | Differences between home-specific and away-specific historical venue statistics |
-| `historical_differences` | Historical form and venue differences only; excludes rating-derived differences |
-| `historical_only` | Recommended starting feature set: last-5 form + Elo + venue form + historical differences |
-| `historical_only_extended` | Expanded historical-only feature set using 3/5/10-match windows and the same Elo/venue information |
-| `history_counts` | Number of prior observed matches for each team |
-
-The `historical_only` and `historical_only_extended` groups do not include `paper_F1`, `paper_F2`, `paper_F3`, or player-rating features.
-
-### Separate sensitivity track — previous-season player ratings
-
-- `prematch_ratings_sensitivity` contains `pm_*` player-rating features derived from the previous season's ratings.
-- These features use the target match's recorded starting XI. Unless the team sheet is verified as available before kickoff, this lineup may be retrospective.
-- Consequently, `historical_plus_ratings_sensitivity` is a **sensitivity experiment**, not the strict leakage-free primary model.
-- 2009/10 ratings are NaN because there is no previous season. Missing values must be imputed inside each training fold, never before splitting.
-
-The generic `diff_*` columns derived from the paper's roster/position ratings are retained for analysis, but are deliberately excluded from `historical_differences` and the historical-only groups.
-
-## Person 2 — Model Training, Evaluation & Inference Implementation
-
-Person 2 builds on Person 1's clean, leakage-free feature tables to implement the complete modeling, temporal evaluation, hyperparameter tuning, model comparison, ensembling, and serialization infrastructure.
-
-### Quick start (Person 2)
+### Step 2: Run model experiments
 
 ```bash
-# Run the complete Person 2 pipeline and test suite
 bash run_person2.sh
 ```
 
-Or execute individual modular commands:
+The Person 2 pipeline runs the paper-reproduction and chronological experiments, generates evaluation tables and figures, serializes the selected model and executes the associated verification steps.
+
+This command can take longer than the inference demo because it includes model training and evaluation.
+
+### Step 3: Run inference independently
 
 ```bash
-# 1. Inspect dataset splits and verify model pipeline creation
-python -m src.model_training
-
-# 2. Run Protocol A (Experiment E0: Paper-style reproduction)
-python scripts/run_paper_reproduction.py
-
-# 3. Run Protocol B (Experiments E1-E5: Chronological evaluation, tuning, ensemble, serialization)
-python scripts/run_model_experiments.py
-
-# 4. Run production inference demonstration on held-out test fixtures
 python scripts/demo_inference.py --fixture_index 0
-
-# 5. Run full automated test suite (25 tests)
-python -m pytest -v
 ```
 
----
+The saved model must already exist. If model weights are absent after a fresh clone, run the documented preparation and model pipeline first.
 
-## Evaluation Protocols
+## Testing
 
-### Protocol A: Original Paper Reproduction (Random 80:20 Split)
-- Reproduces the original paper's random 80:20 train/test split.
-- Evaluates feature sets `paper_F1` (2 squad ratings), `paper_F2` (10 position ratings), and `paper_F3` (280 detailed player match statistics).
-- Evaluates original model families: Polynomial SVM (degree 5 & 3), RBF SVM, Multinomial Logistic Regression, Gaussian Discriminant Analysis (LDA & QDA), and One-hidden-layer Neural Network (MLP).
-- **Paper Reference Comparison:**
-  - Original paper reports **58.89%** test accuracy for F1 with a degree-5 polynomial SVM.
-  - Our reproduction achieves **57.12%** test accuracy (a difference of only -1.77 percentage points, attributable to the paper's undocumented shuffle seed and deduplication of fixture row 434).
-
-### Protocol B: Chronological Future-Season Evaluation (Primary Protocol)
-In real-world soccer forecasting, matches occur chronologically: a model must be trained on past seasons and predict unseen future fixtures without lookahead leakage.
-- **Strict Chronological Ordering:**
-  - **Training Period:** 2009/10–2015/16 (7 seasons, 2,657 matches, ~70.1%)
-  - **Validation Period:** 2016/17 (1 season, 379 matches, ~10.0%) — used strictly for model selection, thresholding, and ensemble tuning.
-  - **Final Test Period:** 2017/18–2018/19 (2 seasons, 754 matches, ~19.9%) — held out untouched until final model evaluation.
-  - Verification: `max(Date_Train) < min(Date_Val) <= max(Date_Val) < min(Date_Test)`. Zero cross-boundary leakage.
-- **Cross-Validation within Training:**
-  - Expanding-window 3-fold chronological cross-validation:
-    - Fold 0: Train 2009/10–2012/13, Validate 2013/14
-    - Fold 1: Train 2009/10–2013/14, Validate 2014/15
-    - Fold 2: Train 2009/10–2014/15, Validate 2015/16
-
----
-
-## Experimental Results Summary
-
-Master results are saved to `results/tables/model_comparison.csv`.
-
-| Exp | Protocol | Feature Group | Model | Val Acc | Val Macro-F1 | Test Acc | Test Macro-F1 | Draw Recall | Key Insight |
-|---|---|---|---|---|---|---|---|---|---|
-| **E0** | Protocol A (Random 80:20) | `paper_F1` | Poly-5 SVM | — | — | **57.12%** | 0.4262 | 0.5% | Reproduces paper reference (58.89%) within 1.77% |
-| **E0** | Protocol A (Random 80:20) | `paper_F3` | Logistic Reg | — | — | **54.75%** | 0.5031 | 27.7% | 280 player stats improve draw recall under random split |
-| **E1** | Protocol B (Chronological) | `historical_only` | Tuned Poly-2 SVM | 51.19% | 0.4885 | 51.19% | 0.4953 | 41.8% | Balanced weighting boosts draw recall from 0% to 41.8% |
-| **E2** | Protocol B (Chronological) | `historical_only_extended` | Tuned Poly-2 SVM | 48.28% | 0.4628 | 49.20% | 0.4754 | 38.8% | Adding 3/10-match windows diluted performance |
-| **E3** | Protocol B (Chronological) | `historical_only` | Multinomial Logistic Reg | 52.24% | 0.4951 | **53.45%** | **0.5162** | 42.4% | Highest individual test accuracy & Macro-F1 |
-| **E3** | Protocol B (Chronological) | `historical_only` | RBF SVM | 50.66% | 0.4915 | 51.19% | 0.4974 | 42.9% | Strong balanced recall across H, D, and A |
-| **E3** | Protocol B (Chronological) | `historical_only` | GDA (LDA) | 57.52% | 0.4736 | **55.84%** | 0.4641 | 10.6% | High accuracy by predicting mostly Home wins; misses draws |
-| **E3** | Protocol B (Chronological) | `historical_only` | GDA (QDA) | 52.77% | 0.4893 | 52.65% | 0.4856 | 27.6% | Class-specific covariances improve draw capture |
-| **E3** | Protocol B (Chronological) | `historical_only` | Neural Net (MLP) | 55.41% | 0.4675 | 54.77% | 0.4718 | 15.9% | Moderate generalization, tends toward majority class |
-| **E3** | Protocol B (Chronological) | `historical_only` | Random Forest | 50.66% | 0.4901 | 50.40% | 0.4944 | **46.5%** | Highest draw recall among all single models |
-| **E3** | Protocol B (Chronological) | `historical_only` | HistGradientBoosting | 53.03% | 0.4922 | 51.72% | 0.4766 | 24.7% | Fast tree-based boosting with binned features |
-| **E4** | Protocol B (Chronological) | `historical_plus_ratings_sensitivity` | Logistic Reg (Sensitivity) | 53.30% | **0.5118** | 51.59% | 0.4928 | 34.7% | Previous-season ratings do not beat pure match history |
-| **E5** | Protocol B (Chronological) | `historical_only` | **Soft Voting Ensemble (HistGB+LR+RF)** | **54.62%** | **0.5074** | **51.86%** | **0.4826** | 28.2% | **Champion Architecture:** Highest validation score, smooth predicted probabilities via soft voting |
-| **Refit** | Protocol B (Train + Val Refit) | `historical_only` | **Selected Champion (Refitted on 0910–1617)** | — | — | **51.99%** | **0.4877** | 30.0% | **Production Model:** Refitted on all pre-test data (3,036 matches) for final serialization |
-
-> **Note on Evaluation Protocol & Discrepancies:**
-> 1. In `results/tables/model_comparison.csv`, all Protocol B models (including E5) are fitted strictly on `df_train` (seasons 2009/10–2015/16, 2,657 matches) for unbiased, fair benchmark comparison. Under this partition, E5 achieves 51.86% test accuracy.
-> 2. Model selection was performed **strictly using validation macro-F1** on season 2016/17 (Ensemble 0.5074 vs Logistic Regression 0.4951). Test labels were completely withheld during selection.
-> 3. Standard ML deployment practice refits the selected architecture on `df_train + df_val` (seasons 2009/10–2016/17, 3,036 matches) before saving to disk. On the held-out test set (seasons 2017/18–2018/19, 754 matches), this serialized model achieves **51.99% test accuracy**, **0.4877 test macro-F1**, and **30.0% draw recall**.
-> 4. Probabilities are generated via soft-voting class aggregation across base estimators rather than formal post-hoc calibration curves.
-
----
-
-## Key Viva & Mini-Project Findings
-
-1. **Reproducibility of the Original Paper:**
-   - The paper's 58.89% result on F1 with degree-5 SVM is closely reproducible (we observed 57.12%).
-   - However, the paper's F1/F2/F3 features rely on end-of-season roster ratings and match minutes played (post-match information), making them unsuitable for live pre-match forecasting.
-2. **Historical Match Features Generalize Well:**
-   - On true unseen future seasons (2017/18 and 2018/19, 754 matches), historical-only features (last-5 form, Elo ratings, home/away venue form, and differential metrics) achieve **53.45% accuracy** and **0.5162 Macro-F1** with Logistic Regression, and **51.99% accuracy** with the refitted ensemble.
-   - The majority class baseline on the final test set (always predicting Home Win) is **46.29%** (349 / 754 matches; 46.17% across the entire 10-season dataset), meaning the pre-match historical features provide a solid statistical edge of **+7.16 percentage points** for Logistic Regression and **+5.70 percentage points** for the ensemble.
-3. **Compact vs Extended History:**
-   - `historical_only` (47 features) outperformed `historical_only_extended` (101 features, 49.20% accuracy). Expanding rolling windows to 3 and 10 games introduced feature collinearity without adding predictive signal.
-4. **The Draw Prediction Challenge:**
-   - Draws represent ~24.8% of matches. Unweighted models frequently achieve 0% to 10% draw recall because predicting Home/Away wins maximizes raw accuracy.
-   - Incorporating class weighting and soft ensembling boosted draw recall to **28%–46%**, dramatically improving Macro-F1 and tactical utility.
-5. **Model Selection & Champion Ensemble:**
-   - Selecting strictly by validation Macro-F1 identified the **Soft Voting Ensemble (HistGradientBoosting + Multinomial Logistic Regression + Random Forest)**.
-   - Refit on combined 2009/10–2016/17 data and evaluated once on the untouched 2017/18–2018/19 test period, it delivers balanced performance across all three match outcomes (Home Recall: 59.0%, Draw Recall: 30.0%, Away Recall: 57.5%).
-
----
-
-## Production Model Serialization & Inference
-
-The final trained champion pipeline is serialized and ready for deployment:
-- **Model weights:** `results/models/epl_model.joblib`
-- **Metadata & schema:** `results/models/model_metadata.json`
-
-### Python Inference API
-
-```python
-import pandas as pd
-from src.model_inference import EPLMatchPredictor
-
-# 1. Load the serialized pipeline and schema
-predictor = EPLMatchPredictor.load(
-    model_path="results/models/epl_model.joblib",
-    metadata_path="results/models/model_metadata.json",
-)
-
-# 2. Predict on fixture features (validates schema & auto-aligns column order)
-sample_fixture = pd.read_csv("data/processed/features_engineered.csv").iloc[[0]]
-prediction = predictor.predict(sample_fixture)
-
-print(prediction)
-# Output columns:
-# ['predicted_outcome', 'predicted_label_full', 'prob_H', 'prob_D', 'prob_A']
-```
-
----
-
-## Generated Artifacts
-
-### Figures (`results/figures/`)
-- `01_outcome_share_by_season.png` — Outcome distribution by season
-- `02_draw_rate_vs_elo_gap.png` — Draw frequency vs Elo difference
-- `03_elo_diff_by_outcome.png` — Elo differences by result
-- `04_top_feature_correlations.png` — Spearman correlations with goal difference
-- `05_elo_trajectories.png` — Team Elo trajectory over time
-- `06_prematch_rating_coverage.png` — Pre-match player rating coverage
-- `07_model_accuracy_comparison.png` — Chronological test accuracy across model families
-- `08_model_macro_f1_comparison.png` — Chronological test macro-F1 comparison
-- `09_per_class_recall_comparison.png` — Grouped recall by class (H / D / A)
-- `10_selected_model_confusion_matrix.png` — Champion model confusion matrix heatmap
-- `11_feature_group_comparison.png` — Historical vs Extended vs Sensitivity feature performance
-- `12_draw_prediction_performance.png` — Draw recall comparison
-- `e0_paper_reproduction_accuracy.png` — Protocol A reproduction vs paper reference
-
-### Tables (`results/tables/`)
-- `model_comparison.csv` — Master evaluation table with all required columns
-- `paper_reproduction_results.csv` — Protocol A results table
-- `chronological_confusion_matrices.csv` — Confusion matrices for all chronological models
-- `e0_confusion_matrices.csv` — Confusion matrices for paper reproduction models
-- `dataset_summary.csv`, `feature_catalog.csv`, `leakage_report.json` — Preprocessing & quality reports
-
----
-
-## Automated Test Suite
-
-All 25 unit and integration tests run in under 8 seconds:
+Run the automated test suite from the repository root:
 
 ```bash
 python -m pytest -v
 ```
 
-1. `tests/test_person1_pipeline.py` (14 tests): Dataset shape, duplicate elimination, paper vector alignment, chronology, perturbation leakage checks, zero-sum Elo, feature separation.
-2. `tests/test_model_pipeline.py` (5 tests): Dataset loading, target leakage prevention, valid target classes, missing value imputation inside pipeline, metric calculation and label order `["H", "D", "A"]`.
-3. `tests/test_chronological_split.py` (3 tests): Strict non-overlapping partition, time arrow verification (`Train < Val < Test`), expanding-window cross-validation.
-4. `tests/test_model_inference.py` (3 tests): Model serialization round-trip, feature reordering, missing feature rejection, output prediction schema.
+The reported final audit executed:
+
+```bash
+.venv/bin/pytest -v
+```
+
+**Reported result: 25 tests passed in 13.63 seconds.**
+
+The suite covers areas including:
+
+- Chronological split partitioning and ordering.
+- Expanding-window chronological cross-validation.
+- Model serialization and inference.
+- Input feature reordering and missing-value handling.
+- Dataset shape, labels and feature alignment.
+- Preprocessing and target-leakage safeguards.
+- Historical feature chronology and Elo behavior.
+- Separation of paper-derived and historical-only feature groups.
+
+The test count above describes the recorded audit execution; it is not a guarantee that a fresh environment will produce the same result without the required data and dependencies.
+
+## Reproducibility and Limitations
+
+### Reproducibility
+
+The project separates data preparation, model training, evaluation and inference into modular scripts. Generated result tables, figures and model metadata support inspection of the experiments.
+
+For reproducibility, use the same dependency versions and follow the documented pipeline order. The paper's undocumented random shuffle seed and the removal of a duplicate fixture limit exact replication of its random-split result.
+
+### Limitations
+
+1. **Limited historical period:** The dataset covers 2009/10–2018/19. Performance on later seasons has not been established by these experiments.
+2. **Retrospective paper-derived features:** Some rating and lineup-sensitive features are derived from season-level files and should not be treated as necessarily available before an individual match.
+3. **Draw prediction:** Draws remain challenging, and model accuracy does not capture every class-specific weakness.
+4. **Evaluation protocol differences:** Random-split reproduction and chronological evaluation answer different questions.
+5. **Test-metric inspection:** Candidate test metrics were logged during the experiment loop. Although programmatic champion selection uses validation macro-F1 and validation accuracy as a tie-breaker, the test results were inspected during model development. The test set should not be described as completely untouched.
+6. **No external future-season validation:** The results do not establish performance on current EPL matches or seasons beyond the available data.
+7. **Probability calibration:** The ensemble outputs probability estimates, but the project has not established that those estimates are calibrated.
+
+The project should therefore be viewed as an experimental study of EPL match prediction and evaluation methodology, not as a guaranteed predictor of future results.
+
+## Team Contributions
+
+### Person 1 — Data Pipeline and Feature Engineering
+
+- Data preprocessing, cleaning and alignment.
+- Construction of paper-derived feature groups.
+- Historical feature engineering and chronological calculations.
+- Elo rating generation.
+- Feature validation and leakage checks.
+- Dataset and feature-pipeline tests.
+
+### Person 2 — Model Training and Evaluation
+
+- Model training pipeline and chronological splits.
+- Research paper reproduction experiments.
+- Model comparison and hyperparameter tuning.
+- Evaluation metrics, confusion matrices, tables and figures.
+- Validation-based champion selection and model serialization.
+- Inference module and command-line demonstration.
+- Model-pipeline and inference tests.
+
+The project was developed collaboratively, with responsibilities divided between the data pipeline and feature-engineering work and the model-training and evaluation work.
+
+## References
+
+1. Harbola, V., and Lee, K. *Gaining a Statistical Edge in Soccer Prediction using Machine Learning: Role of Meta Statistics in Match Prediction.* Stanford University, 2019. [Research paper](https://cs229.stanford.edu/proj2019aut/data/assignment_308832_raw/26414102.pdf).
+2. Harbola, V., and Lee, K. *Gaining a Statistical Edge in Soccer Prediction using Machine Learning: Role of Meta Statistics in Match Prediction.* [Research poster](https://cs229.stanford.edu/proj2019aut/data/assignment_308875_raw/26414177.pdf).
+3. Project repository: [Gaining-a-Statistical-Edge-in-Soccer-Prediction-using-ML](https://github.com/2306apk/Gaining-a-Statistical-Edge-in-Soccer-Prediction-using-ML).
 
 ---
 
-## Authors & Responsibilities
-
-- **Person 1:** Dataset acquisition, cleaning, target labels, paper feature reconstruction, chronological historical feature engineering, leakage verification, exploratory feature analysis.
-- **Person 2:** Model pipeline architecture, chronological evaluation design, hyperparameter tuning, paper-style reproduction, model comparison (8 model families), ensemble design, model serialization, inference interface, automated test suite, documentation.
-- **Both:** End-to-end integration, demo preparation, research report & viva presentation.
+**Project status:** The reported implementation, model artifacts and tests are complete. The results should be interpreted according to their respective evaluation protocols, and the limitations above should be considered when assessing generalization.
